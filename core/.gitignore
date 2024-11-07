@@ -1,0 +1,53 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+.env/
+.venv/
+*.egg
+*.egg-info/
+dist/
+build/
+*.egg-info/
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyo
+.Python
+db.sqlite3
+instance/
+.webassets-cache
+
+# Static files
+staticfiles/
+media/
+
+# Django migrations
+*/migrations/
+
+# Pytest cache
+.pytest_cache/
+
+# Django Secret Key
+.env
+
+# MySQL DB
+*.sql
+*.sqlite3
+
+# vscode
+.vscode/
+
+# macOS
+.DS_Store

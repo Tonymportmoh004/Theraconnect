@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block title %}Client Dashboard{% endblock %}
+
+{% block content %}
+<div class="main-content">
+    <h1>Client Dashboard</h1>
+
+    <section id="appointments" class="section">
+        <h2>Upcoming Appointments</h2>
+        <ul>
+            {% for appointment in upcoming_appointments %}
+            <li>{{ appointment.date }} with {{ appointment.therapist.username }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section id="history" class="section">
+        <h2>Session History</h2>
+        <ul>
+            {% for appointment in past_appointments %}
+            <li>{{ appointment.date }} with {{ appointment.therapist.username }} - Notes: {{ appointment.notes }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section id="therapist" class="section">
+        <h2>Your Therapist</h2>
+        {% if therapist %}
+            <p>Name: {{ therapist.username }}</p>
+            <p>Specialization: {{ therapist.therapist_profile.specializations }}</p>
+            <p>Contact: {{ therapist.email }}</p>
+        {% else %}
+            <p>No therapist assigned.</p>
+        {% endif %}
+    </section>
+
+    <section id="goals" class="section">
+        <h2>Goals & Progress</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ goal_form|crispy }}
+        </form>
+        <ul>
+            {% for goal in goals %}
+            <li>{{ goal.title }}: {{ goal.progress }}% complete ({{ goal.start_date }} - {{ goal.end_date }})</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section id="resources" class="section">
+        <h2>Resources & Exercises</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ resource_form|crispy }}
+        </form>
+        <ul>
+            {% for resource in resources %}
+            <li>
+                <strong>{{ resource.title }}</strong><br>
+                {{ resource.description }}<br>
+                {% if resource.link %}
+                <a href="{{ resource.link }}" target="_blank">View Resource</a><br>
+                {% endif %}
+                {% if resource.file %}
+                <a href="{{ resource.file.url }}" download>Download File</a><br>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section id="messages" class="section">
+        <h2>Messages</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ message_form|crispy }}
+        </form>
+        <h3>Received Messages</h3>
+        <ul>
+            {% for message in received_messages %}
+            <li>
+                <strong>From: {{ message.sender.username }}</strong><br>
+                <strong>Subject: {{ message.subject }}</strong><br>
+                {{ message.body }}<br>
+                <em>{{ message.timestamp }}</em>
+            </li>
+            {% endfor %}
+        </ul>
+        <h3>Sent Messages</h3>
+        <ul>
+            {% for message in sent_messages %}
+            <li>
+                <strong>To: {{ message.receiver.username }}</strong><br>
+                <strong>Subject: {{ message.subject }}</strong><br>
+                {{ message.body }}<br>
+                <em>{{ message.timestamp }}</em>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section id="settings" class="section">
+        <h2>Privacy Settings</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ privacy_form|crispy }}
+        </form>
+    </section>
+
+    <section id="feedback" class="section">
+        <h2>Feedback</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ feedback_form|crispy }}
+        </form>
+        <h3>Previous Feedback</h3>
+        <ul>
+            {% for feedback in feedbacks %}
+            <li>
+                <strong>Rating: {{ feedback.rating }}</strong><br>
+                {{ feedback.feedback_text }}<br>
+                <em>{{ feedback.timestamp }}</em>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+</div>
+{% endblock %}

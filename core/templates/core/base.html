@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Your Site Title{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px;
+            position: fixed;
+            height: 100%;
+        }
+        .sidebar h2 {
+            margin-top: 0;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+        .sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .main-content {
+            margin-left: 270px;
+            background-color: #fff;
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            border-bottom: 2px solid #343a40;
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Your Site Name</h2>
+        <p>Here are your quick links:</p>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="#appointments">Upcoming Appointments</a></li>
+            <li><a href="#history">Session History</a></li>
+            <li><a href="#therapist">Your Therapist</a></li>
+            <li><a href="#goals">Goals & Progress</a></li>
+            <li><a href="#resources">Resources & Exercises</a></li>
+            <li><a href="#messages">Messages</a></li>
+            <li><a href="#settings">Privacy Settings</a></li>
+            <li><a href="#feedback">Feedback</a></li>
+        </ul>
+    </div>
+    <div class="main-content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

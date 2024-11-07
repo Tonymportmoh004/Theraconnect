@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register Role</title>
+</head>
+<body>
+    <h1>Register Role</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Therapist</h2>
+        {{ therapist_form.as_p }}
+        <button name="therapist" type="submit">Register as Therapist</button>
+        <hr>
+        <h2>Client</h2>
+        {{ client_form.as_p }}
+        <button name="client" type="submit">Register as Client</button>
+    </form>
+</body>
+</html>
